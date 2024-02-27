@@ -1,0 +1,49 @@
+{{define "content"}}
+<div class="container p-3">
+    <div class="row g-3">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-header">Sign in</div>
+                <div class="card-body">
+                    <form class="d-flex flex-column gap-3" action="/users/login" method="post">
+                        <div>
+                            <label for="emailSignIn" class="form-label">Email address</label>
+                            <input type="email" class="form-control" name="email" required id="emailSignIn">
+                        </div>
+                        <div>
+                            <label for="passwordSignIn" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" required id="passwordSignIn">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-header">Sign up</div>
+                <div class="card-body">
+                    <form class="d-flex flex-column gap-3" action="/users/register" method="post">
+                        <div>
+                            <label for="emailSignUp" class="form-label">Email address</label>
+                            <input type="email" class="form-control" name="email" required id="emailSignUp"
+                                aria-describedby="emailHelpSignUp">
+                            <small id="emailHelpSignUp" class="form-text">We'll never share your email with anyone
+                                else.</small>
+                        </div>
+                        <div>
+                            <label for="nameSignUp" class="form-label">Name</label>
+                            <input type="text" class="form-control" name="name" required id="nameSignUp">
+                        </div>
+                        <div>
+                            <label for="passwordSignUp" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" required id="passwordSignUp">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}

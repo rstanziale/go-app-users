@@ -1,0 +1,50 @@
+{{define "content"}}
+<!-- <h1>User profile {{.Name}}</h1>
+<p>ID: {{.Id}}</p>
+<p>Email: {{.Email}}</p>
+<form action="/users/info" method="post">
+    Name: <input type="text" name="name" value="{{.Name}}" required />
+    Password: <input type="password" name="password" required />
+    <button type="submit">Update</button>
+</form>
+<form action="/users/logout" method="post">
+    <button type="submit">Logout</button>
+</form> -->
+
+
+<div class="container p-3">
+    <div class="row g-3">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-header">{{.Id}}</div>
+                <div class="card-body">
+                    <h1 class="text-primary">User profile {{.Name}}</h1>
+                    <p>Email: {{.Email}}</p>
+
+                    <form action="/users/logout" method="post">
+                        <button type="submit" class="btn btn-primary">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-header">Update user password</div>
+                <div class="card-body">
+                    <form class="d-flex flex-column gap-3" action="/users/info" method="post">
+                        <div>
+                            <label for="nameSignUp" class="form-label">Name</label>
+                            <input type="text" class="form-control" name="name" value="{{.Name}}" required id="nameSignUp">
+                        </div>
+                        <div>
+                            <label for="passwordSignUp" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" required id="passwordSignUp">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}

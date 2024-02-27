@@ -1,0 +1,77 @@
+version: '3.3'
+
+networks: 
+  ntpgsql:
+    external: false
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.21.0.0/24
+
+services:
+  pgsql:
+    image: postgres:latest
+    restart: unless-stopped
+    container_name: postgresql
+    user: root
+    hostname: postgres
+    networks: 
+      ntpgsql:
+        ipv4_address: 172.21.0.2
+    ports:
+      - target: 5432
+        published: 5433 
+        protocol: tcp
+        mode: host
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+      - psdb-volume:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    container_name: pgadmin4
+    user: root
+    networks:
+      ntpgsql:
+        ipv4_address: 172.21.0.3
+    ports:
+      - target: 80
+        published: 15432
+        protocol: tcp
+        mode: host
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+    depends_on:
+      - pgsql
+  goappusers:
+    image: app-users:latest
+    restart: unless-stopped
+    container_name: app-users
+    networks: 
+      ntpgsql:
+        ipv4_address: 172.21.0.4
+    ports:
+      - target: 9090
+        published: 9090
+        protocol: tcp
+        mode: host
+    environment:
+      - POSTGRES_HOST=172.21.0.2
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    depends_on:
+      - pgsql
+      - pgadmin
+
+volumes:
+  psdb-volume:
