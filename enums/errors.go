@@ -7,4 +7,5 @@ const (
 	SESSION_NOT_VALID  string = "Not valid session"
 	USER_NOT_FOUND     string = "User not found"
 	USER_NOT_UPDATED   string = "Impossible to update user data"
+	USER_NOT_DELETED   string = "Impossible to delete user"
 )

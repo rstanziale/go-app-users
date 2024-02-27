@@ -18,6 +18,5 @@ func main() {
 
 	routes.InitRoutes(r)
 
-	log.Println("Server listening...")
-	http.ListenAndServe(":9090", r)
+	log.Fatal(http.ListenAndServe(":9090", r))
 }
