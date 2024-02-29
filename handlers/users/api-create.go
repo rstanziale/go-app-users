@@ -14,7 +14,9 @@ func ApiCreate(w http.ResponseWriter, r *http.Request) {
 	email := r.FormValue("email")
 	password := r.FormValue("password")
 
-	userId, err := adapters.CreateUser(name, email, password)
+	adapter := adapters.NewUserAdapter()
+
+	userId, err := adapter.CreateUser(name, email, password)
 	if err != nil {
 		log.Println(err)
 
@@ -27,5 +29,5 @@ func ApiCreate(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(model.ResponseMessage(userId))
+	json.NewEncoder(w).Encode(model.ResponseResult(userId))
 }

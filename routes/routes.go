@@ -9,7 +9,8 @@ import (
 )
 
 func InitRoutes(r *mux.Router) {
-	routes.InitUsersRoutes(r)
+	userUser := routes.NewUserRoutes()
+	userUser.InitRoutes(r)
 
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Hello, World!")

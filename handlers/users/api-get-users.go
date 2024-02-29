@@ -10,7 +10,9 @@ import (
 )
 
 func ApiGetUsers(w http.ResponseWriter, r *http.Request) {
-	users, err := adapters.GetUsers()
+	adapter := adapters.NewUserAdapter()
+
+	users, err := adapter.GetUsers()
 	if err != nil {
 		log.Println(err)
 
@@ -23,5 +25,5 @@ func ApiGetUsers(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(model.ResponseMessage(users))
+	json.NewEncoder(w).Encode(model.ResponseResult(users))
 }

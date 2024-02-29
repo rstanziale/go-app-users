@@ -32,7 +32,9 @@ func Info(w http.ResponseWriter, r *http.Request) {
 }
 
 func showUserPage(w http.ResponseWriter, userId int) {
-	user, err := adapters.SearchUserById(userId)
+	adapter := adapters.NewUserAdapter()
+
+	user, err := adapter.SearchUserById(userId)
 	if err != nil {
 		log.Println(err)
 		http.Error(w, enums.USER_NOT_FOUND, http.StatusNotFound)
@@ -47,7 +49,9 @@ func updateUser(r *http.Request, w http.ResponseWriter, userId int) {
 	newName := r.FormValue("name")
 	newPassword := r.FormValue("password")
 
-	err := adapters.UpdateUser(userId, newName, newPassword)
+	adapter := adapters.NewUserAdapter()
+
+	err := adapter.UpdateUser(userId, newName, newPassword)
 	if err != nil {
 		log.Println(err)
 		http.Error(w, enums.USER_NOT_UPDATED, http.StatusInternalServerError)

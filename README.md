@@ -37,3 +37,7 @@ And finally run the command:
 ```bash
 docker-compose up
 ```
+
+## Postman
+
+In the `postman` directory, you will find JSON files that you can import into Postman to test REST services.

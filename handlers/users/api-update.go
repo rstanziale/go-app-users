@@ -16,20 +16,22 @@ func ApiUpdate(w http.ResponseWriter, r *http.Request) {
 	newPassword := r.FormValue("password")
 
 	userIdInt, err := strconv.Atoi(userId)
-    if err != nil {
+	if err != nil {
 		log.Println(err)
-		
+
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(model.ResponseError(enums.USER_NOT_UPDATED))
 
 		return
-    }
+	}
 
-	err = adapters.UpdateUser(userIdInt, newName, newPassword)
+	adapter := adapters.NewUserAdapter()
+
+	err = adapter.UpdateUser(userIdInt, newName, newPassword)
 	if err != nil {
 		log.Println(err)
-		
+
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(model.ResponseError(enums.USER_NOT_UPDATED))

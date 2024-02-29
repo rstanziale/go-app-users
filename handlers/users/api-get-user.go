@@ -19,7 +19,7 @@ func ApiGetUser(w http.ResponseWriter, r *http.Request) {
 	userIdInt, err := strconv.Atoi(userId)
 	if err != nil {
 		log.Println(err)
-		
+
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(model.ResponseError(enums.USER_NOT_FOUND))
@@ -27,11 +27,13 @@ func ApiGetUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	adapter := adapters.NewUserAdapter()
+
 	var user model.User
-	user, err = adapters.SearchUserById(userIdInt)
+	user, err = adapter.SearchUserById(userIdInt)
 	if err != nil {
 		log.Println(err)
-		
+
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(model.ResponseError(enums.USER_NOT_FOUND))
@@ -41,5 +43,5 @@ func ApiGetUser(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(model.ResponseMessage(user))
+	json.NewEncoder(w).Encode(model.ResponseResult(user))
 }

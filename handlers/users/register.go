@@ -19,7 +19,9 @@ func Register(w http.ResponseWriter, r *http.Request) {
 	email := r.FormValue("email")
 	password := r.FormValue("password")
 
-	_, err := adapters.CreateUser(name, email, password)
+	adapter := adapters.NewUserAdapter()
+
+	_, err := adapter.CreateUser(name, email, password)
 	if err != nil {
 		log.Println(err)
 		http.Error(w, enums.IMPOSSIBLE_SIGN_UP, http.StatusInternalServerError)

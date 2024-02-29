@@ -21,7 +21,9 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	email := r.FormValue("email")
 	password := r.FormValue("password")
 
-	var user, err = adapters.SearchUser(email, password)
+	adapter := adapters.NewUserAdapter()
+
+	var user, err = adapter.SearchUser(email, password)
 	if err != nil {
 		log.Println(err)
 		http.Error(w, enums.NOT_FOUND, http.StatusInternalServerError)
