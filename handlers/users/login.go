@@ -11,6 +11,7 @@ import (
 	"github.com/google/uuid"
 )
 
+// Handler to show login page or perform login
 func Login(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		t, _ := template.ParseFiles("templates/layout.html", "templates/login.html")

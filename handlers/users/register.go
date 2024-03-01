@@ -8,6 +8,7 @@ import (
 	"text/template"
 )
 
+// Handler to perform user registration
 func Register(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		t, _ := template.ParseFiles("templates/layout.html", "templates/login.html")

@@ -9,6 +9,7 @@ import (
 	"net/http"
 )
 
+// Handler to get user by its identifier
 func ApiGetUsers(w http.ResponseWriter, r *http.Request) {
 	adapter := adapters.NewUserAdapter()
 

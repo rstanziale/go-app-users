@@ -2,7 +2,7 @@
 
 This test application was created to explore the basic features by the Go programming language.
 
-As a test scenario, a web server was implemented using the [gorilla/mux](https://github.com/gorilla/mux) package. 
+As a test scenario, a web service was implemented using the [gorilla/mux](https://github.com/gorilla/mux) package. 
 
 ## Configuration
 

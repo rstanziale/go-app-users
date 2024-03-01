@@ -9,6 +9,7 @@ import (
 	"net/http"
 )
 
+// Handler to get user info
 func Info(w http.ResponseWriter, r *http.Request) {
 	cookie, err := r.Cookie(enums.SESSION_ID)
 	if err != nil {

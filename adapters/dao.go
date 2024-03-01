@@ -9,31 +9,29 @@ import (
 	_ "github.com/lib/pq"
 )
 
-var dao DAO
-
 type DAO struct {
 	db *sql.DB
 }
 
-func (dao *DAO) New(db *sql.DB) {
-	dao.db = db
-}
-
-func (dao *DAO) GetDb() *sql.DB {
-	return dao.db
-}
+var dao DAO
 
 func init() {
 	dao = DAO{}
-	dao.New(connectDb())
+	dao.connectDb()
 }
 
 func GetDAO() DAO {
 	return dao
 }
 
-func connectDb() *sql.DB {
-	connectionString := createConnectionString()
+// Return database
+func (dao *DAO) GetDb() *sql.DB {
+	return dao.db
+}
+
+// Connect database
+func (dao *DAO) connectDb() {
+	connectionString := dao.createConnectionString()
 
 	db, err := sql.Open("postgres", connectionString)
 	if err != nil {
@@ -47,10 +45,11 @@ func connectDb() *sql.DB {
 
 	log.Println("Successful connection to the database")
 
-	return db
+	dao.db = db
 }
 
-func createConnectionString() string {
+// Create the connection string
+func (dao *DAO) createConnectionString() string {
 	host, ok := os.LookupEnv("POSTGRES_HOST")
 	if !ok {
 		host = "localhost"

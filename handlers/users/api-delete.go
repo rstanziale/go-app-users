@@ -12,6 +12,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// Handler to delete new user
 func ApiDelete(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	userId := vars["id"]

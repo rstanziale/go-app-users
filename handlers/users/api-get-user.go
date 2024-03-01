@@ -12,6 +12,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// Handler to get user by its identifier
 func ApiGetUser(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	userId := vars["id"]

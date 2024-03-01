@@ -13,11 +13,14 @@ type UserRoutes struct {
 	apiUrl string
 }
 
+// UserRoutes constructor
 func NewUserRoutes() *UserRoutes {
 	userRoutes := UserRoutes{"users", "api"}
 	return &userRoutes
 }
 
+// Init UserRoutes.
+// It implements Router interface
 func (userRoutes *UserRoutes) InitRoutes(r *mux.Router) {
 	var baseUserUrl = fmt.Sprintf("/%s", userRoutes.baseUrl)
 	s := r.PathPrefix(baseUserUrl).Subrouter()

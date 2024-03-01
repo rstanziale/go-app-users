@@ -9,6 +9,7 @@ import (
 	"net/http"
 )
 
+// Handler to create new user
 func ApiCreate(w http.ResponseWriter, r *http.Request) {
 	name := r.FormValue("name")
 	email := r.FormValue("email")

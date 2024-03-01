@@ -10,11 +10,13 @@ type UserAdapter struct {
 	dao adapters.DAO
 }
 
+// UserAdapter constructor
 func NewUserAdapter() *UserAdapter {
 	adapter := UserAdapter{adapters.GetDAO()}
 	return &adapter
 }
 
+// Serach user by email and password
 func (adapter *UserAdapter) SearchUser(email string, password string) (model.User, error) {
 	log.Println("Search user")
 
@@ -24,6 +26,7 @@ func (adapter *UserAdapter) SearchUser(email string, password string) (model.Use
 	return user, err
 }
 
+// Serach user by its identifier
 func (adapter *UserAdapter) SearchUserById(userId int) (model.User, error) {
 	log.Println("Search user by id")
 
@@ -33,6 +36,7 @@ func (adapter *UserAdapter) SearchUserById(userId int) (model.User, error) {
 	return user, err
 }
 
+// Get all registred users
 func (adapter *UserAdapter) GetUsers() ([]model.User, error) {
 	log.Println("Get all users")
 
@@ -54,6 +58,7 @@ func (adapter *UserAdapter) GetUsers() ([]model.User, error) {
 	return users, err
 }
 
+// Create new user
 func (adapter *UserAdapter) CreateUser(name string, email string, password string) (int, error) {
 	log.Println("Create user")
 
@@ -63,6 +68,7 @@ func (adapter *UserAdapter) CreateUser(name string, email string, password strin
 	return userId, err
 }
 
+// Update user info
 func (adapter *UserAdapter) UpdateUser(userId int, newName string, newPassword string) error {
 	log.Println("Update user")
 
@@ -71,6 +77,7 @@ func (adapter *UserAdapter) UpdateUser(userId int, newName string, newPassword s
 	return err
 }
 
+// Delete a user
 func (adapter *UserAdapter) DeleteUser(userId int) error {
 	log.Println("Delete user")
 

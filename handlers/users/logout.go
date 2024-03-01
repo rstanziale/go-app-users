@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+// Handler to perform logout
 func Logout(w http.ResponseWriter, r *http.Request) {
 	cookie, err := r.Cookie(enums.SESSION_ID)
 	if err != nil {

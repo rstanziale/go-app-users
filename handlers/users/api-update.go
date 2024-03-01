@@ -10,6 +10,7 @@ import (
 	"strconv"
 )
 
+// Handler to update user info
 func ApiUpdate(w http.ResponseWriter, r *http.Request) {
 	userId := r.FormValue("userId")
 	newName := r.FormValue("name")
